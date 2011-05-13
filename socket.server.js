@@ -23,6 +23,8 @@ var server = http.createServer(function(request, response) {
         }
         
         fs.readFile(filename, "binary", function(err, file) {
+            var reasonPhrase = {};
+            
             if(err) {
                 response.writeHead(500, {"Content-Type": "text/plain"});
                 response.write(err + "\n");
@@ -30,7 +32,7 @@ var server = http.createServer(function(request, response) {
                 return;
             }
             
-            response.writeHead(200);
+            response.writeHead(200, reasonPhrase);
             response.write(file, "binary");
             response.end();
         });

@@ -39,14 +39,21 @@ var server = http.createServer(function(request, response) {
     });
 });
 
-server.listen(8081);
+function getTimestamp() {
+    var currTime = new Date(),
+        months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-sys.puts("Server running at http://localhost:8081/");
+    return currTime.getDate() + ' ' + months[currTime.getMonth()] + ' ' + currTime.getHours() + ':' + currTime.getMinutes() + ':' + currTime.getSeconds();
+}
+
+server.listen(8081);
+sys.puts(getTimestamp() + " - Server running at http://localhost:8081/");
 
 var socket = io.listen(server);
 socket.on('connection',function(client) {
-    client.on('message', function(data){ 
-        console.log("Message: " + JSON.stringify(data));
+    client.on('message', function(data){
+
+        sys.puts(getTimestamp() + " - Message: " + JSON.stringify(data));
         socket.broadcast(data);
     });
     client.on('disconnect', function() { });

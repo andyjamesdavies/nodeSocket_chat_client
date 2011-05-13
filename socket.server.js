@@ -7,7 +7,12 @@ var sys = require("sys"),
 
 var server = http.createServer(function(request, response) {
     var uri = url.parse(request.url).pathname,
-        filename = path.join(process.cwd(), uri);
+        filename = '';
+    
+    if (uri.substr(-1) === '/') {
+        uri += 'index.html';
+    }
+    filename = path.join(process.cwd(), uri);
     
     path.exists(filename, function(exists){
         if(!exists) {

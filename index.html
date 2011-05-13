@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat test</title>
+    <style type="text/css">
+    #msgs { height: 200px; overflow-y:scroll; border:1px solid #E0E0E0; }
+        #msgs div { padding:5px; }
+        div.odd { background-color: #E0E0E0; }
+    form { width:100%; text-align:center; padding:10px; }
+        form label { display:block; width:400px; margin:0 auto; text-align:left; }
+        form input { width:400px; margin-bottom:10px; }
+    </style>
+</head>
+<body>
+
+<div id="msgs"></div>
+
+<form id="chat" action="">
+	<label for="username">Username:</label>
+        <input type="text" name="username" id="username" /><br />
+    
+    <label for="msg">Message:</label>
+        <input id="msg" type="text" name="message" /><br />
+    
+    <input type="submit" id="submit" name="submit" value="submit" />
+</form>
+
+<!-- REQUIRED -->    
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://localhost:8081/socket.io/socket.io.js"></script>
+<!-- END REQUIRED -->
+
+<script type="text/javascript" src="js/socket.client.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#chat').submit(function(e) {
+       e.preventDefault();
+       
+       sendMsg();
+    });
+});
+</script>
+</body>
+</html>

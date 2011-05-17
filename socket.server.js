@@ -32,6 +32,10 @@ var server = http.createServer(function(request, response) {
                 return;
             }
             
+            if ( uri.substr(-4) === '.css') {
+                reasonPhrase = {"Content-Type": "text/css"}
+            }
+            
             response.writeHead(200, reasonPhrase);
             response.write(file, "binary");
             response.end();
